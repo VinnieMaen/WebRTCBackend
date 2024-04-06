@@ -24,7 +24,11 @@ const server = require("http").createServer(app);
 
 app.use(express.json());
 
-app.use(cors());
+app.use(
+  cors({
+    allowedHeaders: ["Authorization", "Content-Type"],
+  })
+);
 connect();
 
 app.use("/api/", api);
