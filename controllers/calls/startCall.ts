@@ -16,6 +16,7 @@ export default async function startCall(req: Request, res: Response) {
       name: req.body.name.toLowerCase(),
       status: null,
       available: true,
+      loc: req.body.location,
       sdpData: JSON.stringify(req.body.sdpData),
       candidates: JSON.parse(req.body.candidates),
       socketID: null,
@@ -32,6 +33,11 @@ export default async function startCall(req: Request, res: Response) {
       message: "Call and User Created!",
       data: {
         accessToken,
+        id: savedUser._id,
+        callData: {
+          sdpData: req.body.sdpData,
+          candidates: JSON.parse(req.body.candidates),
+        },
       },
     });
   } catch (error) {

@@ -1,18 +1,15 @@
 import mongoose, { Model, Schema } from "mongoose";
 
-interface Candidate {
-  candidate: string;
-  sdpMLineIndex: number;
-  sdpMid: string;
-  usernameFragment: string;
-}
-
 interface User extends Document {
   _id: mongoose.Schema.Types.ObjectId;
   name: string;
   status: string;
   available: boolean;
   sdpData: string;
+  loc: {
+    lat: number;
+    lon: number;
+  };
   candidates: object;
   socketID: string;
   createdAt: number;
@@ -33,6 +30,16 @@ const iceCandidateSchema = new mongoose.Schema({
   },
   usernameFragment: {
     type: String,
+    required: true,
+  },
+});
+const locationScheme = new mongoose.Schema({
+  lon: {
+    type: Number,
+    required: true,
+  },
+  lat: {
+    type: Number,
     required: true,
   },
 });
@@ -58,9 +65,13 @@ const userSchema: Schema<User> = new mongoose.Schema(
     candidates: [
       {
         type: iceCandidateSchema,
-        required: true,
+        require: true,
       },
     ],
+    loc: {
+      type: locationScheme,
+      require: true,
+    },
     socketID: {
       type: String,
       require: false,

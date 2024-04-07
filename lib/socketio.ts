@@ -3,10 +3,6 @@ import User from "../models/User";
 let io: any;
 const { Server } = require("socket.io");
 
-async function getSockets(_id: string) {
-  let friends = await User.findOne({ _id }).populate("friends", "socketID");
-}
-
 export function init(server: any) {
   io = new Server(server, { cors: { origin: "*" } });
 
@@ -24,8 +20,14 @@ export function init(server: any) {
     //socket.disconnect(0);
     //socket.disconnect(1);
 
-    socket.on("message", async (data: any) => {
-      io.to(data?.socketID).emit("message", data);
+    socket.on("newConnection", async (data: any) => {
+      const user = await User.findById(data.id);
+      console.log(user?.name);
+      io.to(user?.socketID).emit("createConnection", data);
+    });
+
+    socket.on("newCallCreated", async (data: any) => {
+      socket.broadcast.emit("newCall", data);
     });
   });
 }
