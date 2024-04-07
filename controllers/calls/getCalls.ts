@@ -15,7 +15,7 @@ export default async function getCalls(req: Request, res: Response) {
       data: users,
     });
   } catch (error) {
-    console.log(error);
+    error;
     res.status(500).json({
       success: false,
     });

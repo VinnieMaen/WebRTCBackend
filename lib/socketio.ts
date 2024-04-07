@@ -22,7 +22,6 @@ export function init(server: any) {
 
     socket.on("newConnection", async (data: any) => {
       const user = await User.findById(data.id);
-      console.log(user?.name);
       io.to(user?.socketID).emit("createConnection", data);
     });
 
