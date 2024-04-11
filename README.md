@@ -43,7 +43,7 @@ This is a fully working prototype and lacks some functionality. This project is 
 MONGODB_URI=mongodb:<your-connection-uri>
 PORT="80" // Or any other port as you like
 ```
-Replace <your-database-name> with the actual name of your MongoDB database.
+Replace <your-database-name> with the actual connection URI of your MongoDB database.
 
 
 ## Running the app
