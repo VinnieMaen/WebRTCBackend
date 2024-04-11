@@ -36,8 +36,8 @@ This is a fully working prototype and lacks some functionality. This project is 
    ```
 
 ## Configuration
-1. Create a .env file in the project root directory (ignore this file in Git).
-2. Add your MongoDB connection URI and Server Port to the .env file:
+1. **Create a .env file in the project root directory (ignore this file in Git).**
+2. **Add your MongoDB connection URI and Server Port to the .env file:**
 
 ```
 MONGODB_URI=mongodb:<your-connection-uri>
